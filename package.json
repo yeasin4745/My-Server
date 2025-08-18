@@ -13,8 +13,7 @@
   "type": "commonjs",
   "dependencies": {
     "express": "^5.1.0",
-    "express-rate-limit": "^8.0.1",
-
+    "express-rate-limit": "^8.0.1"
   }
 }
 
