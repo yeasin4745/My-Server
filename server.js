@@ -33,11 +33,9 @@ res.end(`<h1>Your IP ${req.ip} Requesr number ${homeReq}</h1>`)
 
 app.get('/user',limiter2,(req,res)=>{
 userReq++;
-res.send(`<h1>Welcome user route . Request no ${userReq}}</h1>`)
+res.send(`<h1>Welcome user route . Request no ${userReq}</h1>`)
 
 })
-
-
 
 
 
