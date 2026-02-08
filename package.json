@@ -1,14 +1,19 @@
 {
-  "name": "My-Server",
-  "version": "1.0.0",
-  "description": "",
+  "name": "my-server",
+  "version": "1.1.0",
+  "description": "A simple Express server with rate limiting and request tracking.",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "node server.js",
+    "dev": "node --watch server.js"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "express",
+    "rate-limit",
+    "nodejs",
+    "server"
+  ],
+  "author": "Yeasin",
   "license": "ISC",
   "type": "commonjs",
   "dependencies": {
@@ -16,4 +21,3 @@
     "express-rate-limit": "^8.0.1"
   }
 }
-

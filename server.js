@@ -1,45 +1,46 @@
-let rateLimit=require('express-rate-limit');
-let express=require('express')
-let port=3000;
+const express = require('express');
+const rateLimit = require('express-rate-limit');
 
-let app=express()
+const app = express();
+const port = process.env.PORT || 3000;
 
-let limiter=rateLimit({
-windowMs: 1*60*1000,
-max:5,
-message:'Too many request in home Route'
-})
+const createLimiter = (message) => {
+    return rateLimit({
+        windowMs: 60 * 1000,
+        max: 5,
+        message: message,
+        standardHeaders: true,
+        legacyHeaders: false,
+    });
+};
 
+const homeLimiter = createLimiter('Too many requests to the home route. Please try again later.');
+const userLimiter = createLimiter('Too many requests to the user route. Please try again later.');
 
+let homeRequestCount = 0;
+let userRequestCount = 0;
 
-let limiter2=rateLimit({
-windowMs: 1*60*1000,
-max:5,
-message:'Too many request in user route'
-})
+app.get('/', homeLimiter, (req, res) => {
+    homeRequestCount++;
+    res.send(`
+        <div style="font-family: sans-serif; text-align: center; margin-top: 50px;">
+            <h1>Welcome to the Home Route</h1>
+            <p>Your IP: <strong>${req.ip}</strong></p>
+            <p>Total Home Requests: <strong>${homeRequestCount}</strong></p>
+        </div>
+    `);
+});
 
-
-let homeReq=0,userReq=0;
-//app.use(limiter)
-
-app.get('/',limiter,(req,res)=>{
-//res.send('Welcome back')
-homeReq++;
-res.end(`<h1>Your IP ${req.ip} Requesr number ${homeReq}</h1>`)
-//console.log(req)
-
-})
-
-
-app.get('/user',limiter2,(req,res)=>{
-userReq++;
-res.send(`<h1>Welcome user route . Request no ${userReq}</h1>`)
-
-})
-
-
-
+app.get('/user', userLimiter, (req, res) => {
+    userRequestCount++;
+    res.send(`
+        <div style="font-family: sans-serif; text-align: center; margin-top: 50px;">
+            <h1>Welcome to the User Route</h1>
+            <p>Total User Requests: <strong>${userRequestCount}</strong></p>
+        </div>
+    `);
+});
 
 app.listen(port, () => {
-  console.log('Server running on port ', port);
+    console.log(`Server is running on http://localhost:${port}`);
 });
