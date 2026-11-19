@@ -36,6 +36,7 @@ app.get('/user', userLimiter, (req, res) => {
     res.send(`
         <div style="font-family: sans-serif; text-align: center; margin-top: 50px;">
             <h1>Welcome to the User Route</h1>
+	 <p>Server status : online</p>
             <p>Total User Requests Count: <strong>${userRequestCount}</strong></p>
         </div>
     `);
