@@ -7,7 +7,7 @@ const port = process.env.PORT || 3000;
 const createLimiter = (message) => {
     return rateLimit({
         windowMs: 60 * 1000,
-        max: 5,
+        max: 10,
         message: message,
         standardHeaders: true,
         legacyHeaders: false,
