@@ -26,6 +26,7 @@ app.get('/', homeLimiter, (req, res) => {
         <div style="font-family: sans-serif; text-align: center; margin-top: 50px;">
             <h1>Welcome to the Home Route</h1>
             <p>Your IP: <strong>${req.ip}</strong></p>
+	   <p>Server status : ONLINE</p>    
             <p>Total Home Requests: <strong>${homeRequestCount}</strong></p>
         </div>
     `);
