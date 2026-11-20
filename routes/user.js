@@ -16,24 +16,17 @@ const userLimiter = rateLimit({
 
 let userRequestCount = 0;
 
-router.get('/', userLimiter, (req, res) => {
+router.get('/' , userLimiter, (req, res) => {
     userRequestCount++;
 
-    res.status(200).send(`
-        <!DOCTYPE html>
-        <html lang="en">
-        <head>
-            <meta charset="UTF-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <title>User - My Server</title>
-        </head>
-        <body style="font-family: sans-serif; text-align: center; margin-top: 50px;">
-            <h1>Welcome to the User Route</h1>
-            <p>Server Status: <strong>Online</strong></p>
-            <p>Total User Requests: <strong>${userRequestCount}</strong></p>
-        </body>
-        </html>
-    `);
+    res.status(200).json({
+        success: true,
+        message: 'Welcome to the User Route',
+        data: {
+            serverStatus: 'Online',
+            totalRequests: userRequestCount
+        }
+    });
 });
 
 module.exports = router;
